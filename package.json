@@ -1,0 +1,24 @@
+{
+  "name": "delilahresto",
+  "version": "1.0.0",
+  "description": "Proyecto final del curso Acamica",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amsuppi/delilahResto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amsuppi/delilahResto/issues"
+  },
+  "homepage": "https://github.com/amsuppi/delilahResto#readme",
+  "dependencies": {
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.10"
+  }
+}
