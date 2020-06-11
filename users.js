@@ -11,7 +11,6 @@ const jwt = require('jsonwebtoken');
 
 app.use(bodyParser.json());
 
-
 function validateRegister(req, res, next){
     const  email  = req.body.email;
 
@@ -45,22 +44,24 @@ function validateLogin(req, res, next){
 
     if(!email || !pass){
         res.json("Faltan datos!!");
+    }else{
+        next();
     }
 
-    const token = jwt.sign(email, pass);
-    res.json({token});
    
 }
 
 app.post("/login", validateLogin, (req,res)=>{
-    res.json("Bienvenido");
+    const {email, pass} = req.body;
+    const token = jwt.sign(email, pass);
+    res.json({token}, "secret");
 
 })
 
 const autenticarUsuario = (req,res,next) => {
     try{
         const token = req.header.authorization.split(' ')[1];
-        const verificationToken = jwt.verify(token);
+        const verificationToken = jwt.verify(token, "secret");
 
         if(verificationToken){
             req.body.name = verificationToken;
