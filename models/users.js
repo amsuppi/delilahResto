@@ -13,7 +13,7 @@ module.exports = (sequelize, type)=>{
             allowNull: false },
         phone: type.INTEGER(11),
         adress: type.STRING(50),
-        pass: type.STRING(50),
+        pass: type.STRING,
         admin: type.BOOLEAN (10)
     })
 }

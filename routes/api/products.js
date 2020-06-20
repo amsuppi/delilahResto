@@ -1,52 +1,40 @@
 const router = require('express').Router();
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('mysql://mari:suppi@localhost:8889/mi_base_2.0');
 
 
-router.get('/', (req, res)=>{
-    const resultado = sequelize.query(
-        `SELECT * FROM products`,
-        {type: sequelize.QueryTypes.SELECT}
-    );
+const { products } = require('../../db');
 
-    res.json(resultado);
-})
 
-router.get('/:id', function (req, res) {
-    const id = req.params.id;
-
-    sequelize.query(
-        `SELECT * FROM productos WHERE id = ?`,
-        {replacements:[id], type: sequelize.QueryTypes.SELECT})
-
-        .then(resultado =>{
-            res.json(resultado);
-        })
-
+router.get("/", async (req, res) => {
+    const getProducts = await products.findAll();
+    res.status(200).json(getProducts);
   });
 
-router.put('/:id', (req, res)=>{
-    const {id, title, price, stock} = req.body;
-
-        sequelize.query(
-            `UPDATE products SET title = ?, price = ?, stock = ? WHERE id = ?`,
-            {replacements:[title, price, stock, id]})
-        
-        .then( res.json("actualizado"))
+  router.post("/", async (req, res) => {
+    const postProducts = await products.create(req.body);
+    res.status(200).json(postProducts);
+  });
+  
+  router.put("/:id", async (req, res) => {
+    await putProducts.update(req.body, {
+      where: { id: req.params.id }
+    }).then(()=>{
+        res.status(200).json("Producto actualizado correctamente")
+    }).catch(()=>{
+        res.status(403).json("No se pudo actualizar el producto");
+    })
     
-});
-
-router.post('/', (req, res) =>{
-
-    const {title, price, stock} = req.body;
-
-    sequelize.query(`
-        INSERT INTO products (title, price, stock) VALUES ( ?, ?, ?)`,
-        {replacements: [title, price, stock]
-
-    }).then(res.json("Agregado"))
-
-});
+  });
+  
+  router.delete('/:id', async (req, res)=> {
+      await products.destroy({
+          where: {id: req.params.id}
+      }).then(()=>{
+        res.status(200).json("Producto eliminado");
+      }).catch(()=>{
+        res.status(403).json("No se pudo eliminar el producto");
+      })
+      
+  })
 
 module.exports = router;
 

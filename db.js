@@ -10,11 +10,13 @@ const products = ProductsModels(sequelize, Sequelize);
 const users = UsersModels(sequelize, Sequelize);
 const orders = OrdersModels(sequelize, Sequelize);
 
+
 sequelize.sync({force: false })
     .then(()=>{
         console.log("Tablas sinconizadas")
     });
 
+    
 module.exports = {
     products, 
     users, 
