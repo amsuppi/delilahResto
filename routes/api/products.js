@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
   });
   
   router.put("/:id", async (req, res) => {
-    await putProducts.update(req.body, {
+    await products.update(req.body, {
       where: { id: req.params.id }
     }).then(()=>{
         res.status(200).json("Producto actualizado correctamente")

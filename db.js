@@ -16,6 +16,12 @@ sequelize.sync({force: false })
         console.log("Tablas sinconizadas")
     });
 
+products.belongsToMany(orders, { through: "orders-products" });
+orders.belongsToMany(products, { through: "orders-products" });
+    
+users.hasMany(orders);
+orders.belongsTo(users);
+
     
 module.exports = {
     products, 

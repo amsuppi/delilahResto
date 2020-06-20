@@ -7,10 +7,7 @@ module.exports = (sequelize, type)=>{
         },
         name: type.STRING(50),
         lastname: type.STRING(50),
-        email: {
-            type: type.STRING(50),
-            unique: true,
-            allowNull: false },
+        email: type.STRING(50),
         phone: type.INTEGER(11),
         adress: type.STRING(50),
         pass: type.STRING,
