@@ -1,19 +1,20 @@
 const router = require('express').Router();
-const {orders} = require('../../db');
+const midelware = require('../../midelware');
+const { orders } = require('../../db');
 
 //------------------------------------------------------------
 
-    router.get("/", async (req, res) => {
+    router.get("/",midelware.checkToken, midelware.isAdmin, async (req, res) => {
         const getOrders = await orders.findAll();
         res.status(200).json(getOrders);
       });
     
-      router.post("/", async (req, res) => {
+      router.post("/",midelware.checkToken, async (req, res) => {
         const postOrders = await orders.create(req.body);
         res.status(200).json(postOrders);
       });
       
-      router.put("/:id", async (req, res) => {
+      router.put("/:id",midelware.checkToken, midelware.isAdmin, async (req, res) => {
         await orders.update(req.body, {
           where: { id: req.params.id }
         }).then(()=>{
@@ -24,7 +25,7 @@ const {orders} = require('../../db');
         
       });
       
-      router.delete('/:id', async (req, res)=> {
+      router.delete('/:id', midelware.checkToken, midelware.isAdmin, async (req, res)=> {
           await orders.destroy({
               where: {id: req.params.id}
           }).then(()=>{

@@ -1,11 +1,14 @@
-module.exports = (sequelize, type)=>{
-    return sequelize.define('orders-products', {
-        id:{
+module.exports = (sequelize, type) => {
+    return sequelize.define('order', {
+        id: {
             type: type.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        id_user: type.STRING(50),
-        id_products: type.STRING(5),
+        status: type.STRING,
+        price: type.INTEGER(32),
+        pay_method: type.STRING,
+        productId: type.INTEGER,
     });
+
 }

@@ -13,7 +13,8 @@ const orders = OrdersModels(sequelize, Sequelize);
 
 sequelize.sync({force: false })
     .then(()=>{
-        console.log("Tablas sinconizadas")
+        console.log("Tablas sinconizadas");
+        
     });
 
 products.belongsToMany(orders, { through: "orders-products" });
@@ -21,6 +22,7 @@ orders.belongsToMany(products, { through: "orders-products" });
     
 users.hasMany(orders);
 orders.belongsTo(users);
+
 
     
 module.exports = {

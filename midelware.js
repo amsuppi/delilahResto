@@ -1,35 +1,34 @@
-const jwt = require('jsonwebtoken');
-const jwtSecret = require("./jwt.secret");
+const jwt = require('jwt-simple');
 
-const validateToken = (req, res, next)=>{
-    
-    try {
-        const token = req.headers.authorization.split(' ')[1];
 
-        const verification = jwt.verify(token, jwtSecret);
+const checkToken = (req, res , next) => {
 
-        loginUser= verification;
-        next();
-
-        
-    } catch (error) {
-
-        res.status(400).json("Validación incorrecta");
-        
+    if(!req.headers['token']){
+        return res.status(404).json({ error: 'Incluir el user token en el header.'});
     }
+
+    const userToken = req.headers['token'];
+    let payload = {};
+
+    try{
+        payload = jwt.decode(userToken, 'contraseña muy secreta');
+    } catch (err){
+        return res.json({error: 'Token Incorrecto.'});
+    }
+
+    req.id = payload.id;
+    next();
+};
+
+const isAdmin = (req, res, next) => {
+    const admin = req.body.admin
+    if(!admin === 1)
+    return res.json('Usuario no autorizado.');
+    next();
 }
 
-const isAdmin = (req, res, next)=>{
-    const admin = req.body.admin;
-
-    if(!req.body.admin){
-        res.status("403");
-        res.json("No estas autorizado");
-    }else{
-        next();
-    }
-}
 
 module.exports = {
-    validateToken
+    checkToken: checkToken,
+    isAdmin: isAdmin
 }

@@ -11,6 +11,6 @@ module.exports = (sequelize, type)=>{
         phone: type.INTEGER(11),
         adress: type.STRING(50),
         pass: type.STRING,
-        admin: type.BOOLEAN (10)
+        admin: type.INTEGER (10)
     })
 }
