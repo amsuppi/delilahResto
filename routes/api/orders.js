@@ -1,11 +1,19 @@
 const router = require('express').Router();
 const midelware = require('../../midelware');
 const { orders } = require('../../db');
+const users = require('../../models/users');
+const products = require('../../models/products');
 
 //------------------------------------------------------------
 
     router.get("/",midelware.checkToken, midelware.isAdmin, async (req, res) => {
-        const getOrders = await orders.findAll();
+        const getOrders = await orders.findAll({
+          include:[{
+            model: products
+          }]
+        }).then((data)=>{
+          console.log(data);
+        })
         res.status(200).json(getOrders);
       });
     
@@ -16,7 +24,7 @@ const { orders } = require('../../db');
       
       router.put("/:id",midelware.checkToken, midelware.isAdmin, async (req, res) => {
         await orders.update(req.body, {
-          where: { id: req.params.id }
+          where: { id: req.params.orderId }
         }).then(()=>{
             res.status(200).json("La orden fue actualizada correctamente")
         }).catch(()=>{
@@ -27,7 +35,7 @@ const { orders } = require('../../db');
       
       router.delete('/:id', midelware.checkToken, midelware.isAdmin, async (req, res)=> {
           await orders.destroy({
-              where: {id: req.params.id}
+              where: {id: req.params.orderId}
           }).then(()=>{
             res.status(200).json("Orden eliminada con exito");
           }).catch(()=>{

@@ -17,12 +17,11 @@ sequelize.sync({force: false })
         
     });
 
-products.belongsToMany(orders, { through: "orders-products" });
-orders.belongsToMany(products, { through: "orders-products" });
-    
 users.hasMany(orders);
 orders.belongsTo(users);
-
+products.belongsToMany(orders, { through: "order-products" });
+orders.belongsToMany(products, { through: "order-products" });
+    
 
     
 module.exports = {

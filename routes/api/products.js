@@ -15,7 +15,7 @@ router.get("/", midelware.checkToken, async (req, res) => {
   
   router.put("/:id",midelware.checkToken, midelware.isAdmin, async (req, res) => {
     await products.update(req.body, {
-      where: { id: req.params.id }
+      where: { id: req.params.productId }
     }).then(()=>{
         res.status(200).json("Producto actualizado correctamente")
     }).catch(()=>{
@@ -26,7 +26,7 @@ router.get("/", midelware.checkToken, async (req, res) => {
   
   router.delete('/:id',midelware.checkToken, midelware.isAdmin, async (req, res)=> {
       await products.destroy({
-          where: {id: req.params.id}
+          where: {id: req.params.productId}
       }).then(()=>{
         res.status(200).json("Producto eliminado");
       }).catch(()=>{
