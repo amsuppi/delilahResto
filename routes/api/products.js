@@ -10,12 +10,12 @@ router.get("/", midelware.checkToken, async (req, res) => {
 
   router.post("/",midelware.checkToken, midelware.isAdmin, async (req, res) => {
     const postProducts = await products.create(req.body);
-    res.status(200).json(postProducts);
+    res.status(200).json("Producto generado con exito");
   });
   
-  router.put("/:id",midelware.checkToken, midelware.isAdmin, async (req, res) => {
+  router.put("/:productId",midelware.checkToken, midelware.isAdmin, async (req, res) => {
     await products.update(req.body, {
-      where: { id: req.params.productId }
+      where: { productId: req.params.productId }
     }).then(()=>{
         res.status(200).json("Producto actualizado correctamente")
     }).catch(()=>{
@@ -24,9 +24,9 @@ router.get("/", midelware.checkToken, async (req, res) => {
     
   });
   
-  router.delete('/:id',midelware.checkToken, midelware.isAdmin, async (req, res)=> {
+  router.delete('/:productId', midelware.checkToken, midelware.isAdmin, async (req, res)=> {
       await products.destroy({
-          where: {id: req.params.productId}
+          where: {productId: req.params.productId}
       }).then(()=>{
         res.status(200).json("Producto eliminado");
       }).catch(()=>{

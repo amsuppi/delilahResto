@@ -1,5 +1,5 @@
 const jwt = require('jwt-simple');
-
+const { users } = require('./db');
 
 const checkToken = (req, res , next) => {
 
@@ -21,12 +21,15 @@ const checkToken = (req, res , next) => {
 };
 
 const isAdmin = (req, res, next) => {
-    const admin = req.body.admin
-    if(!admin === 1)
-    return res.json('Usuario no autorizado.');
-    next();
+    const userI = req.admin;
+    console.log(userI);
+    if(!userI){
+        res.json("ERRRORRRRR!");
+        
+    }else{
+        next();
+    } 
 }
-
 
 module.exports = {
     checkToken: checkToken,

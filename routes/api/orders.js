@@ -4,14 +4,8 @@ const { orders, products } = require('../../db');
 
 //------------------------------------------------------------
 
-    router.get("/",midelware.checkToken, midelware.isAdmin, async (req, res) => {
-        const getOrders = await orders.findAll({
-          include:[{
-            model: products,
-            model: products,
-            as: "order-products"}
-          ]
-        })
+    router.get("/", midelware.checkToken, midelware.isAdmin, async (req, res) => {
+        const getOrders = await orders.findAll();
         res.status(200).json(getOrders);
       });
     
@@ -27,29 +21,29 @@ const { orders, products } = require('../../db');
                 })
                  prod.addProduct(order);
               });
+              res.status(200).json("Su orden a sido generada con exito");
             }
         )
-        res.status(200).json(postOrders);
       });
       
-      router.put("/:id",midelware.checkToken, midelware.isAdmin, async (req, res) => {
+      router.put("/:orderId",midelware.checkToken, midelware.isAdmin, async (req, res) => {
         await orders.update(req.body, {
-          where: { id: req.params.orderId }
+          where: { orderId: req.params.orderId }
         }).then(()=>{
             res.status(200).json("La orden fue actualizada correctamente")
         }).catch(()=>{
-            res.status(403).json("No se pudo actualizar la orden");
+            res.status(400).json("No se pudo actualizar la orden");
         })
         
       });
       
-      router.delete('/:id', midelware.checkToken, midelware.isAdmin, async (req, res)=> {
+      router.delete('/:orderId', midelware.checkToken, midelware.isAdmin, async (req, res)=> {
           await orders.destroy({
-              where: {id: req.params.orderId}
+              where: { orderId: req.params.orderId}
           }).then(()=>{
             res.status(200).json("Orden eliminada con exito");
           }).catch(()=>{
-            res.status(403).json("No se pudo eliminar la orden");
+            res.status(400).json("No se pudo eliminar la orden");
           })
           
       })

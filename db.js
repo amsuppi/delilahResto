@@ -16,11 +16,26 @@ products.belongsToMany(orders, { as:"Products", through: "order-products", forei
 orders.belongsToMany(products, { as:"Orders", through: "order-products", foreignKey:"orderId" });
 
 
-sequelize.sync({force: false })
+sequelize.sync({force: true })
     .then(()=>{
         console.log("Tablas sinconizadas");
+
+        createQuerys();
         
     });
+
+function createQuerys(){
+
+    users.create({
+            name:"Franco",
+            lastname:"Perez",
+            email:"franco.perez@gmail.com",
+            phone: 345234234,
+            adress:"Av velez Sarfield 123",
+            pass: "123456",
+            admin: 1
+    })
+}
 
 module.exports = {
     products, 
