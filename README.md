@@ -4,7 +4,10 @@ Esto describe los recursos que componen la API REST de Delilah Resto, basada en 
 
 ## Comenzando 🚀
 
-### Dependencias 
+### Instalar las dependencias 
+
+npm i body-parser express morgan mysql nodemon jwt-simple bcryptjs sequelize
+
 ```
 "dependencies": {
     "bcrypt": "^5.0.0",
