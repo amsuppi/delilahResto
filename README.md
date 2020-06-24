@@ -5,18 +5,30 @@ Esto describe los recursos que componen la API REST de Delilah Resto, basada en 
 ## Comenzando 🚀
 
 ### Dependencias 
-
-Debe tener instaladas las dependencias necesarias para correr el proyecto con exito. 
-
 ```
-EJEMPLO
+"dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.5.0",
+    "jwt-simple": "^0.5.6",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.10"
+  }
 ```
 ### Instalación 
 
 Corre el servidor
+
 ```
-EJEMPLO
+npm start
 ```
+Servidor corriendo 
+
+```
+Servidor arrancado en el puerto 4000
+```
+
 ## Ejecutando las pruebas ⚙️
 
 Para poder interactuar con la api es necesario usar un entorno que permita el envío de peticiones HTTP REST sin necesidad de desarrollar un cliente, como por ejemplo Postman entre otras.
@@ -24,18 +36,25 @@ Para poder interactuar con la api es necesario usar un entorno que permita el en
 ### Registro del usuario
 
 Primero que todo debemos registrar al usuario para poder acceder al resto de peticion HTTP, para esto usaremos la siguiente ruta
-* 121.123.123
+
+* POST/api/users/register
 
 Lo siguinte que le vamos a pasar son los datos del usuario
 
 ```
-EJEMPLO
+{
+		    "name":"Franco",
+		    "lastname":"Perez",
+        "email":"franco.perez@gmail.com",
+        "phone": "345234234",
+        "adress":"Av velez sarfield 564",
+        "pass":"1234"
+    }
 ```
 
 ### Login del usuario
 
-Ya registrados nos debemos logear para poder obtener el token que nos permitira empezar a interacturar con los pedidos y las oredenes.
-* 123.123.123
+* POST/api/users/register
 
 En este momento existen dos tipos de login, el de un usuario común y el del administrador, que ya viene registrado desde la base de datos
 
@@ -44,33 +63,29 @@ En este momento existen dos tipos de login, el de un usuario común y el del adm
 El rol administrador es quien tiene todos los permisos para poder acceder a la REST API, al venir por defecto lo unico que debemos hacer es logerase con 
 
 ```
-EJEMPLO
+{
+        "email":"franco.perez@gmail.com",
+        "pass":"1234"
+    }
 ```
 
-#### Rol ususuario
+#### Token
 
-En este caso el rol usuario necesita ser registrado anteriormente para poder logearse, a diferencia del de administrador no tiene todos los accesos en la rest api, por lo que lo unico con lo que puede acceder es a los pedidos y a su propia orden
-
-```
-EJEMPLO
-```
-
-Cuando se lograros logear con exito, el sistema devolvera un token, donde se debera copiar en el headers, para poder validar que el usuario se a logeado con exito, y asi identificar el rol de cada usuario
-
-```
-EJEMPLO
-```
-
+Cuando se lograros logear con exito, el sistema devolvera un token, donde se debera copiar en el headers con la key `token`
 
 ## Peticiones de productos ☕
 
 ### Subiendo los productos
 
 ```
-EJEMPLO
+POST/api/products
 ```
 ```
-EJEMPLO
+{
+       "title": "Milanesas con papas",
+       "price" : "250",
+       "stock": "11"
+    }
 ```
 
 ### Trayendo los productos
@@ -78,29 +93,40 @@ EJEMPLO
 ##### Request
 
 ```
-EJEMPLO
+GET/api/products
 ```
 
 ##### Response
 
 ```
-EJEMPLO
+{
+        "productId": 1,
+        "title": "Milanesas con papas",
+        "price": 2050,
+        "stock": 7,
+        "createdAt": "2020-06-23T23:29:52.000Z",
+        "updatedAt": "2020-06-24T18:01:46.000Z"
+    }
 ```
 
 ### Editar un producto
 
 ```
-EJEMPLO
+PUT/api/products/id
 ```
 
 ```
-EJEMPLO
+{
+       "title": "Milanesas con papas",
+       "price" : "250",
+       "stock": "11"
+    }
 ```
 
 ### Eliminar un producto
 
 ```
-EJEMPLO
+DELETE/api/products/id
 ```
 
 
@@ -111,29 +137,46 @@ EJEMPLO
 ##### Request
 
 ```
-EJEMPLO
+GET/api/users
 ```
 
 ##### Response
 
 ```
-EJEMPLO
+ {
+        "id": 1,
+        "name": "Amalia Maribel",
+        "lastname": "Suppi",
+        "email": "maribel7@fl.co",
+        "phone": 345234234,
+        "adress": "Belisario Caraffa",
+        "pass": "$2b$10$reuzqX.ccNyNBHRSH9lB9OnPqEX4uYobBW7Kkh365hiYiUvq81hT6",
+        "createdAt": "2020-06-23T23:40:16.000Z",
+        "updatedAt": "2020-06-24T14:34:19.000Z"
+    }
 ```
 
 ### Editar un usuario
 
 ```
-EJEMPLO
+PUT/api/users/id
 ```
 
 ```
-EJEMPLO
+ {
+        "name": "Amalia Maribel",
+        "lastname": "Suppi",
+        "email": "maribel7@fl.co",
+        "phone": 345234234,
+        "adress": "Belisario Caraffa",
+        "pass": "$2b$10$reuzqX.ccNyNBHRSH9lB9OnPqEX4uYobBW7Kkh365hiYiUvq81hT6"
+    }
 ```
 
 ### Eliminar un usuario
 
 ```
-EJEMPLO
+DELETE/api/users/id
 ```
 
 
@@ -142,35 +185,59 @@ EJEMPLO
 ### Generar un pedido
 
 ```
-EJEMPLO
+POST/api/orders
 ```
+
+```
+{
+	"status": "activo",
+	"total" : "600",
+	"pay": "efectvio",
+	"productId" : [1,3]
+	
+}
+```
+
+
 ### Trayendo los pedidos
 
 ##### Request
 
 ```
-EJEMPLO
+GET/api/orders
 ```
 
 ##### Response
 
 ```
-EJEMPLO
+{
+        "orderId": 6,
+        "status": "activo",
+        "total": 600,
+        "pay": "efectvio",
+        "createdAt": "2020-06-24T14:17:22.000Z",
+        "updatedAt": "2020-06-24T14:17:22.000Z",
+        "userId": 1
+    }
 ```
 
 ### Editar un pedido
 
 ```
-EJEMPLO
+PUT/api/orders/id
 ```
 
 ```
-EJEMPLO
+{
+        "status": "activo",
+        "total": 600,
+        "pay": "efectvio",
+    }
 ```
 
 ### Eliminar un pedido
 
 ```
-EJEMPLO
+DELETE/api/orders/id
 ```
 
