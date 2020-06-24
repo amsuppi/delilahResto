@@ -42,16 +42,32 @@ Primero que todo debemos registrar al usuario para poder acceder al resto de pet
 
 * POST/api/users/register
 
+#### Registro usuario común
+
 Lo siguinte que le vamos a pasar son los datos del usuario
 
 ```
 {
-		    "name":"Franco",
-		    "lastname":"Perez",
+	"name":"Franco",
+	"lastname":"Perez",
         "email":"franco.perez@gmail.com",
         "phone": "345234234",
         "adress":"Av velez sarfield 564",
         "pass":"1234"
+    }
+```
+
+#### Registro Usuario administrador
+
+```
+{
+	"name":"Franco",
+	"lastname":"Perez",
+        "email":"franco.perez@gmail.com",
+        "phone": "345234234",
+        "adress":"Av velez sarfield 564",
+        "pass":"1234",
+	"admin": 1
     }
 ```
 
