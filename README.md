@@ -26,7 +26,7 @@ Para poder interactuar con la api es necesario usar un entorno que permita el en
 Primero que todo debemos registrar al usuario para poder acceder al resto de peticion HTTP, para esto usaremos la siguiente ruta
 * 121.123.123
 
-Depndiendo de cada rol son las peticiones que podra realizar el usuario
+Lo siguinte que le vamos a pasar son los datos del usuario
 
 ```
 EJEMPLO
@@ -55,6 +55,122 @@ En este caso el rol usuario necesita ser registrado anteriormente para poder log
 EJEMPLO
 ```
 
+Cuando se lograros logear con exito, el sistema devolvera un token, donde se debera copiar en el headers, para poder validar que el usuario se a logeado con exito, y asi identificar el rol de cada usuario
+
+```
+EJEMPLO
+```
 
 
+## Peticiones de productos ☕
+
+### Subiendo los productos
+
+```
+EJEMPLO
+```
+```
+EJEMPLO
+```
+
+### Trayendo los productos
+
+##### Request
+
+```
+EJEMPLO
+```
+
+##### Response
+
+```
+EJEMPLO
+```
+
+### Editar un producto
+
+```
+EJEMPLO
+```
+
+```
+EJEMPLO
+```
+
+### Eliminar un producto
+
+```
+EJEMPLO
+```
+
+
+## Peticiones de usuarios 🤓
+
+### Trayendo los usuarios
+
+##### Request
+
+```
+EJEMPLO
+```
+
+##### Response
+
+```
+EJEMPLO
+```
+
+### Editar un usuario
+
+```
+EJEMPLO
+```
+
+```
+EJEMPLO
+```
+
+### Eliminar un usuario
+
+```
+EJEMPLO
+```
+
+
+## Peticiones de pedidos 📦
+
+### Generar un pedido
+
+```
+EJEMPLO
+```
+### Trayendo los pedidos
+
+##### Request
+
+```
+EJEMPLO
+```
+
+##### Response
+
+```
+EJEMPLO
+```
+
+### Editar un pedido
+
+```
+EJEMPLO
+```
+
+```
+EJEMPLO
+```
+
+### Eliminar un pedido
+
+```
+EJEMPLO
+```
 
