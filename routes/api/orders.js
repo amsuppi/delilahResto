@@ -1,24 +1,34 @@
 const router = require('express').Router();
 const midelware = require('../../midelware');
-const { orders } = require('../../db');
-const users = require('../../models/users');
-const products = require('../../models/products');
+const { orders, products } = require('../../db');
 
 //------------------------------------------------------------
 
     router.get("/",midelware.checkToken, midelware.isAdmin, async (req, res) => {
         const getOrders = await orders.findAll({
           include:[{
-            model: products
-          }]
-        }).then((data)=>{
-          console.log(data);
+            model: products,
+            model: products,
+            as: "order-products"}
+          ]
         })
         res.status(200).json(getOrders);
       });
     
-      router.post("/",midelware.checkToken, async (req, res) => {
-        const postOrders = await orders.create(req.body);
+      router.post("/", midelware.checkToken, async (req, res) => {
+        const postProduct = req.body.productId;
+        const postOrder = req.body;
+        postOrder.userId = req.id;
+        const postOrders = await orders.create(postOrder).then(
+            (order)=>{
+              postProduct.forEach(async element => {
+                const prod = await products.findOne({
+                  where: { productId: element }
+                })
+                 prod.addProduct(order);
+              });
+            }
+        )
         res.status(200).json(postOrders);
       });
       
