@@ -16,25 +16,33 @@ products.belongsToMany(orders, { as:"Products", through: "order-products", forei
 orders.belongsToMany(products, { as:"Orders", through: "order-products", foreignKey:"orderId" });
 
 
-sequelize.sync({force: true })
+sequelize.sync({force: false })
     .then(()=>{
         console.log("Tablas sinconizadas");
 
         createQuerys();
-        
     });
 
 function createQuerys(){
-
-    users.create({
-            name:"Franco",
-            lastname:"Perez",
-            email:"franco.perez@gmail.com",
-            phone: 345234234,
-            adress:"Av velez Sarfield 123",
-            pass: "123456",
-            admin: 1
+    products.create({
+        
+            title: "Milanesas con papas",
+            price : "250",
+            stock: "20"
     })
+    products.create({
+        
+        title: "Pizza de musarella",
+        price : "350",
+        stock: "15"
+    })
+
+    products.create({
+        
+        title: "Docena de empandas",
+        price : "350",
+        stock: "10"
+})
 }
 
 module.exports = {

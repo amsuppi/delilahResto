@@ -38,7 +38,8 @@ router.post("/login", async (req, res) => {
 
   const createToken = (user) => {
     const payload = {
-      id: user.id
+      id: user.id ,
+      admin: user.admin
     }
 
     return jwt.encode(payload, 'contraseña muy secreta');

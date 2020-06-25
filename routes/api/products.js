@@ -19,7 +19,7 @@ router.get("/", midelware.checkToken, async (req, res) => {
     }).then(()=>{
         res.status(200).json("Producto actualizado correctamente")
     }).catch(()=>{
-        res.status(403).json("No se pudo actualizar el producto");
+        res.status(400).json("No se pudo actualizar el producto");
     })
     
   });
@@ -30,7 +30,7 @@ router.get("/", midelware.checkToken, async (req, res) => {
       }).then(()=>{
         res.status(200).json("Producto eliminado");
       }).catch(()=>{
-        res.status(403).json("No se pudo eliminar el producto");
+        res.status(400).json("No se pudo eliminar el producto");
       })
       
   })

@@ -16,16 +16,17 @@ const checkToken = (req, res , next) => {
         return res.json({error: 'Token Incorrecto.'});
     }
 
-    req.id = payload.id;
+    req.user = payload;
     next();
 };
 
 const isAdmin = (req, res, next) => {
-    const userI = req.admin;
+    const userI = req.user.admin;
+
     console.log(userI);
-    if(!userI){
+    if(!userI === 1){
         res.json("ERRRORRRRR!");
-        
+        return
     }else{
         next();
     } 
