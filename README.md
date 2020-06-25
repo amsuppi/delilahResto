@@ -6,7 +6,9 @@ Esto describe los recursos que componen la API REST de Delilah Resto, basada en 
 
 ### Instalar las dependencias 
 
-npm i body-parser express morgan mysql nodemon jwt-simple bcryptjs sequelize
+`npm init`
+
+`npm i body-parser express morgan mysql nodemon jwt-simple bcryptjs sequelize`
 
 ```
 "dependencies": {
@@ -48,12 +50,12 @@ Lo siguinte que le vamos a pasar son los datos del usuario
 
 ```
 {
-	"name":"Franco",
-	"lastname":"Perez",
-        "email":"franco.perez@gmail.com",
-        "phone": "345234234",
-        "adress":"Av velez sarfield 564",
-        "pass":"1234"
+	"name":"Yanina",
+	"lastname":"Lopez",
+    "email":"yanilopez@gmail.com",
+    "phone": "34523234",
+    "adress":"Av cañada 864",
+    "pass":"12345"
     }
 ```
 
@@ -63,10 +65,10 @@ Lo siguinte que le vamos a pasar son los datos del usuario
 {
 	"name":"Franco",
 	"lastname":"Perez",
-        "email":"franco.perez@gmail.com",
-        "phone": "345234234",
-        "adress":"Av velez sarfield 564",
-        "pass":"1234",
+    "email":"franco.perez@gmail.com",
+    "phone": "345234234",
+    "adress":"Av velez sarfield 564",
+    "pass":"1234",
 	"admin": 1
     }
 ```
@@ -75,11 +77,9 @@ Lo siguinte que le vamos a pasar son los datos del usuario
 
 * POST/api/users/register
 
-En este momento existen dos tipos de login, el de un usuario común y el del administrador, que ya viene registrado desde la base de datos
-
 #### Rol administrador
 
-El rol administrador es quien tiene todos los permisos para poder acceder a la REST API, al venir por defecto lo unico que debemos hacer es logerase con 
+El rol administrador es quien tiene todos los permisos para poder acceder a la REST API
 
 ```
 {
@@ -90,7 +90,7 @@ El rol administrador es quien tiene todos los permisos para poder acceder a la R
 
 #### Token
 
-Cuando se lograros logear con exito, el sistema devolvera un token, donde se debera copiar en el headers con la key `token`
+Cuando se logean con exito, el sistema devolvera un token, donde se debera copiar en el headers con la key `token`
 
 ## Peticiones de productos ☕
 
@@ -121,7 +121,7 @@ GET/api/products
 {
         "productId": 1,
         "title": "Milanesas con papas",
-        "price": 2050,
+        "price": 250,
         "stock": 7,
         "createdAt": "2020-06-23T23:29:52.000Z",
         "updatedAt": "2020-06-24T18:01:46.000Z"
@@ -164,11 +164,11 @@ GET/api/users
 ```
  {
         "id": 1,
-        "name": "Amalia Maribel",
-        "lastname": "Suppi",
-        "email": "maribel7@fl.co",
+        "name": "Franco",
+        "lastname": "Perez",
+        "email": "ranco.perez@gmail.com",
         "phone": 345234234,
-        "adress": "Belisario Caraffa",
+        "adress": "Av velez Sarfield 654",
         "pass": "$2b$10$reuzqX.ccNyNBHRSH9lB9OnPqEX4uYobBW7Kkh365hiYiUvq81hT6",
         "createdAt": "2020-06-23T23:40:16.000Z",
         "updatedAt": "2020-06-24T14:34:19.000Z"
@@ -183,11 +183,11 @@ PUT/api/users/id
 
 ```
  {
-        "name": "Amalia Maribel",
-        "lastname": "Suppi",
-        "email": "maribel7@fl.co",
+        "name": "Franco",
+        "lastname": "Perez",
+        "email": "ranco.perez@gmail.com",
         "phone": 345234234,
-        "adress": "Belisario Caraffa",
+        "adress": "Av velez Sarfield 654",
         "pass": "$2b$10$reuzqX.ccNyNBHRSH9lB9OnPqEX4uYobBW7Kkh365hiYiUvq81hT6"
     }
 ```

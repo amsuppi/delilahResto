@@ -22,10 +22,10 @@ const checkToken = (req, res , next) => {
 
 const isAdmin = (req, res, next) => {
     const userI = req.user.admin;
+    console.log(userI)
 
-    console.log(userI);
-    if(!userI === 1){
-        res.json("ERRRORRRRR!");
+    if(userI === null){
+        res.status(403).json("No estas autorizado para realizar la accion!");
         return
     }else{
         next();
