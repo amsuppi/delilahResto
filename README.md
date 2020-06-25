@@ -8,7 +8,7 @@ Esto describe los recursos que componen la API REST de Delilah Resto, basada en 
 
 `npm init`
 
-`npm i body-parser express morgan mysql nodemon jwt-simple bcryptjs sequelize`
+`npm i body-parser express express-validator mysql2 jwt-simple bcrypt sequelize`
 
 ```
 "dependencies": {
